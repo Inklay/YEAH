@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Yeah !",
+  "version": "1.0.0",
+  "author": "Inklay",
+  "description": "Miss the Miiverse ? Me too",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "yeah.js"
+      ],
+      "css": [
+        "yeah.css"
+      ],
+      "matches": [
+        "https://x.com/*",
+        "https://twitter.com/*"
+      ]
+    }
+  ]
+}

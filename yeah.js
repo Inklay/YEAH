@@ -15,21 +15,38 @@ const addYeahButton = () => {
     yeahButton.addEventListener('click', async () => {
       likeButton.parentNode.parentNode.childNodes[0].childNodes[0].click()
 
-      try {
-        const base64 = await fetch(images[idx])
-        const blob = await base64.blob()
-        const file = new File([blob], 'image.png', {type: 'image/png'})
-        const dataTransfer = new DataTransfer()
-        dataTransfer.items.add(file)
+      const data = images[idx].split(',')
+      const imageData = atob(data[data.length - 1])
+      let dataIdx = imageData.length
+      const byteArray = new Uint8Array(dataIdx)
 
-        const pasteEvent = new ClipboardEvent('paste', {
-          bubbles: true,
-          cancelable: true,
-          clipboardData: dataTransfer,
-        })
+      while (dataIdx--) {
+        byteArray[dataIdx] = imageData.charCodeAt(dataIdx)
+      }
 
-        setTimeout(() => {document.activeElement.dispatchEvent(pasteEvent)}, 100)
-      } catch (e) {}
+      const file = new File([byteArray], 'image.png', {type: 'image/png'})
+      // const base64 = await fetch(images[idx])
+      // const blob = await base64.blob()
+      // const file = new File([blob], 'image.png', {type: 'image/png'})
+      const dataTransfer = new DataTransfer()
+      dataTransfer.items.add(file)
+
+      const pasteEvent = new ClipboardEvent('paste', {
+        bubbles: true,
+        cancelable: true,
+        clipboardData: dataTransfer,
+      })
+      
+      checkForActiveElement(pasteEvent)
+
+      function checkForActiveElement () {
+        if (document.activeElement.tagName.toLocaleLowerCase() !== 'div') {
+          console.log(document.activeElement.tagName)
+          setTimeout(checkForActiveElement, 100)
+        } else {
+          document.activeElement.dispatchEvent(pasteEvent)
+        }
+      }
     })
     likeButton.parentNode.insertAdjacentElement('afterEnd', yeahButton)
   })

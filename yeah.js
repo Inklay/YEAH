@@ -25,9 +25,6 @@ const addYeahButton = () => {
       }
 
       const file = new File([byteArray], 'image.png', {type: 'image/png'})
-      // const base64 = await fetch(images[idx])
-      // const blob = await base64.blob()
-      // const file = new File([blob], 'image.png', {type: 'image/png'})
       const dataTransfer = new DataTransfer()
       dataTransfer.items.add(file)
 
@@ -40,11 +37,12 @@ const addYeahButton = () => {
       checkForActiveElement(pasteEvent)
 
       function checkForActiveElement () {
-        if (document.activeElement.tagName.toLocaleLowerCase() !== 'div') {
-          console.log(document.activeElement.tagName)
-          setTimeout(checkForActiveElement, 100)
-        } else {
+        if (document.activeElement.tagName.toLocaleLowerCase() === 'div'
+        && document.activeElement.getAttribute('role').toLocaleLowerCase() === 'textbox'
+        && document.activeElement.getAttribute('contenteditable').toLocaleLowerCase() === 'true') {
           document.activeElement.dispatchEvent(pasteEvent)
+        } else {
+          setTimeout(checkForActiveElement, 100)
         }
       }
     })

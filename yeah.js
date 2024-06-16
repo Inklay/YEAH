@@ -15,35 +15,53 @@ const addYeahButton = () => {
     yeahButton.addEventListener('click', async () => {
       likeButton.parentNode.parentNode.childNodes[0].childNodes[0].click()
 
-      const data = images[idx].split(',')
-      const imageData = atob(data[data.length - 1])
-      let dataIdx = imageData.length
-      const byteArray = new Uint8Array(dataIdx)
-
-      while (dataIdx--) {
-        byteArray[dataIdx] = imageData.charCodeAt(dataIdx)
-      }
-
-      const file = new File([byteArray], 'image.png', {type: 'image/png'})
-      const dataTransfer = new DataTransfer()
-      dataTransfer.items.add(file)
-
-      const pasteEvent = new ClipboardEvent('paste', {
-        bubbles: true,
-        cancelable: true,
-        clipboardData: dataTransfer,
-      })
-      
-      checkForActiveElement(pasteEvent)
+      checkForActiveElement()
 
       function checkForActiveElement () {
         if (document.activeElement.tagName.toLocaleLowerCase() === 'div'
         && document.activeElement.getAttribute('role').toLocaleLowerCase() === 'textbox'
         && document.activeElement.getAttribute('contenteditable').toLocaleLowerCase() === 'true') {
-          document.activeElement.dispatchEvent(pasteEvent)
+          createImage()
         } else {
           setTimeout(checkForActiveElement, 100)
         }
+      }
+
+      function createImage () {
+        const data = images[idx].split(',')
+        const imageData = atob(data[data.length - 1])
+        let dataIdx = imageData.length
+        const byteArray = new Uint8Array(dataIdx)
+
+        while (dataIdx--) {
+          byteArray[dataIdx] = imageData.charCodeAt(dataIdx)
+        }
+
+        const file = new File([byteArray], 'image.png', { type: 'image/png' })
+        const dataTransfer = new DataTransfer()
+        dataTransfer.items.add(file)
+
+        const pasteEvent = new ClipboardEvent('paste', {
+          bubbles: true,
+          cancelable: true,
+          clipboardData: dataTransfer
+        })
+        
+        if (pasteEvent.clipboardData.files.length === 0) {
+          // For browsers that do not allow extension to use Clipboard event, this is a dirty workarount using the clipboard API instead
+          pasteWithClipboard(file)
+          return
+        }
+        document.activeElement.dispatchEvent(pasteEvent)
+      }
+
+      async function pasteWithClipboard (file) {
+        const clipboardBackup = await navigator.clipboard.read()
+        const image = new ClipboardItem({ 'image/png': file })
+        navigator.clipboard.write([image]).then(() => {
+          document.execCommand('paste')
+          navigator.clipboard.write(clipboardBackup)
+        })
       }
     })
     likeButton.parentNode.insertAdjacentElement('afterEnd', yeahButton)

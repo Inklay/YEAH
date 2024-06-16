@@ -5,6 +5,7 @@
   "author": "Inklay",
   "description": "Miss the Miiverse ? Me too",
   "icons": {
+    "64": "icon64.png",
     "128": "icon128.png"
   },
   "permissions": [

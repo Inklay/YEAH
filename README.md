@@ -10,7 +10,7 @@ No where for now, the extension if stil in the review process. The images are ju
 
 [<img src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png" height="50" alt='Available in the Chrome Web Store'>]()
 
-[<img src="https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png" height="50" alt='Get the addon for Mozilla Firefox'>]()
+[<img src="https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png" height="50" alt='Get the addon for Mozilla Firefox'>](https://addons.mozilla.org/en-US/firefox/addon/twitter_yeah/)
 
 [<img src="https://user-images.githubusercontent.com/78568641/212470539-dd4d22a0-3af8-4fa7-9671-6df5b2e26a70.png" height="50" alt='Get the addon for Microsoft Edge'>]()
 

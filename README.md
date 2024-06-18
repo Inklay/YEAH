@@ -6,9 +6,8 @@ YEAH ! is a brower extension that adds a yeah button to every ~~x post~~ tweet t
 No more private likes, just yeah everywhere !
 
 ## Download
-No where for now, the extension if stil in the review process. The images are juste placeholder for now.
 
-[<img src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png" height="50" alt='Available in the Chrome Web Store'>]()
+[<img src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png" height="50" alt='Available in the Chrome Web Store'>](https://chromewebstore.google.com/detail/yeah/hlekojcpjonkgchlmjllbjkncffkdceh)
 
 [<img src="https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png" height="50" alt='Get the addon for Mozilla Firefox'>](https://addons.mozilla.org/en-US/firefox/addon/twitter_yeah/)
 
